@@ -1,0 +1,49 @@
+﻿@model IEnumerable<GerenciadorConsultasMedicas.Models.Medicos>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CRM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Titularidade)
+        </th>
+        <th>
+            Especialidade
+        </th>
+        <th>
+            Nome
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CRM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titularidade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Especialidades.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pessoas.Nome) @Html.DisplayFor(modelItem => item.Pessoas.Sobrenome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MedicoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MedicoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MedicoID })
+        </td>
+    </tr>
+}
+
+</table>

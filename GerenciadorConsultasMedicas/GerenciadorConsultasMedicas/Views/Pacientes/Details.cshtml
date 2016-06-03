@@ -1,0 +1,32 @@
+﻿@model GerenciadorConsultasMedicas.Models.Pacientes
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Pacientes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Nome
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pessoas.Nome) @Html.DisplayFor(model => model.Pessoas.Sobrenome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlanoSaude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlanoSaude)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PacienteID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

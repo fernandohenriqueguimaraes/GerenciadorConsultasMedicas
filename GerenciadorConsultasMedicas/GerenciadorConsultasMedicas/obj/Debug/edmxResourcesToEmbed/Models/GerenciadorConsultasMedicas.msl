@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GerenciadorConsultasMedicasModelStoreContainer" CdmEntityContainer="GerenciadorConsultasMedicasEntities">
+    <EntitySetMapping Name="ConsultaMedica">
+      <EntityTypeMapping TypeName="GerenciadorConsultasMedicasModel.ConsultaMedica">
+        <MappingFragment StoreEntitySet="ConsultaMedica">
+          <ScalarProperty Name="ConsultaMedicaID" ColumnName="ConsultaMedicaID" />
+          <ScalarProperty Name="Paciente" ColumnName="Paciente" />
+          <ScalarProperty Name="Medico" ColumnName="Medico" />
+          <ScalarProperty Name="Queixa" ColumnName="Queixa" />
+          <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Horario" ColumnName="Horario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Especialidades">
+      <EntityTypeMapping TypeName="GerenciadorConsultasMedicasModel.Especialidades">
+        <MappingFragment StoreEntitySet="Especialidades">
+          <ScalarProperty Name="EspecialidadeID" ColumnName="EspecialidadeID" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Medicos">
+      <EntityTypeMapping TypeName="GerenciadorConsultasMedicasModel.Medicos">
+        <MappingFragment StoreEntitySet="Medicos">
+          <ScalarProperty Name="MedicoID" ColumnName="MedicoID" />
+          <ScalarProperty Name="CRM" ColumnName="CRM" />
+          <ScalarProperty Name="Pessoa" ColumnName="Pessoa" />
+          <ScalarProperty Name="Especialidade" ColumnName="Especialidade" />
+          <ScalarProperty Name="Titularidade" ColumnName="Titularidade" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pacientes">
+      <EntityTypeMapping TypeName="GerenciadorConsultasMedicasModel.Pacientes">
+        <MappingFragment StoreEntitySet="Pacientes">
+          <ScalarProperty Name="PacienteID" ColumnName="PacienteID" />
+          <ScalarProperty Name="Pessoa" ColumnName="Pessoa" />
+          <ScalarProperty Name="PlanoSaude" ColumnName="PlanoSaude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pessoas">
+      <EntityTypeMapping TypeName="GerenciadorConsultasMedicasModel.Pessoas">
+        <MappingFragment StoreEntitySet="Pessoas">
+          <ScalarProperty Name="PessoaID" ColumnName="PessoaID" />
+          <ScalarProperty Name="CPF" ColumnName="CPF" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Sobrenome" ColumnName="Sobrenome" />
+          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+          <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ListarConsultasOrdenadasPorDataEHora" FunctionName="GerenciadorConsultasMedicasModel.Store.ListarConsultasOrdenadasPorDataEHora">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GerenciadorConsultasMedicasModel.ListarConsultasOrdenadasPorDataEHora_Result">
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Horario" ColumnName="Horario" />
+          <ScalarProperty Name="Médico" ColumnName="Médico" />
+          <ScalarProperty Name="Paciente" ColumnName="Paciente" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarConsultasPorMedico" FunctionName="GerenciadorConsultasMedicasModel.Store.ListarConsultasPorMedico">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GerenciadorConsultasMedicasModel.ListarConsultasPorMedico_Result">
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Horario" ColumnName="Horario" />
+          <ScalarProperty Name="Paciente" ColumnName="Paciente" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarConsultasOrdenadasPorDataEHora1" FunctionName="GerenciadorConsultasMedicasModel.Store.ListarConsultasOrdenadasPorDataEHora">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GerenciadorConsultasMedicasModel.ListarConsultasOrdenadasPorDataEHora1_Result1">
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Horario" ColumnName="Horario" />
+          <ScalarProperty Name="Medico" ColumnName="Medico" />
+          <ScalarProperty Name="Paciente" ColumnName="Paciente" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

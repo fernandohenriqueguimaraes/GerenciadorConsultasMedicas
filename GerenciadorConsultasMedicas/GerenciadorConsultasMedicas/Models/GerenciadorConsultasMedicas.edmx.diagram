@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="47cf288c51ca487f96f126512f582541" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="GerenciadorConsultasMedicasModel.ConsultaMedica" Width="1.5" PointX="3.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GerenciadorConsultasMedicasModel.Especialidades" Width="1.5" PointX="6.5" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GerenciadorConsultasMedicasModel.Medicos" Width="1.5" PointX="3.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GerenciadorConsultasMedicasModel.Pacientes" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GerenciadorConsultasMedicasModel.Pessoas" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="GerenciadorConsultasMedicasModel.fk_consulta_medico_pid" ManuallyRouted="false" />
+        <AssociationConnector Association="GerenciadorConsultasMedicasModel.fk_consulta_paciente_pid" ManuallyRouted="false" />
+        <AssociationConnector Association="GerenciadorConsultasMedicasModel.fk_medico_especialidade_pid" ManuallyRouted="false" />
+        <AssociationConnector Association="GerenciadorConsultasMedicasModel.fk_medico_pessoa_pid" ManuallyRouted="false" />
+        <AssociationConnector Association="GerenciadorConsultasMedicasModel.fk_paciente_pessoa_pid" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

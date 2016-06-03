@@ -1,0 +1,43 @@
+﻿@model IEnumerable<GerenciadorConsultasMedicas.Models.ConsultaMedica>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Data/Hora Agendada
+        </th>
+        <th>
+            Médico
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Paciente)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @String.Format("{0:dd/MM/yyyy}", item.Data) - @Html.DisplayFor(modelItem => item.Horario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Medicos.Pessoas.Nome) @Html.DisplayFor(modelItem => item.Medicos.Pessoas.Sobrenome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pacientes.Pessoas.Nome) @Html.DisplayFor(modelItem => item.Pacientes.Pessoas.Sobrenome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ConsultaMedicaID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ConsultaMedicaID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ConsultaMedicaID })
+        </td>
+    </tr>
+}
+
+</table>

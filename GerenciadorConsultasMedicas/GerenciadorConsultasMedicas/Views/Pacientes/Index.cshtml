@@ -1,0 +1,37 @@
+﻿@model IEnumerable<GerenciadorConsultasMedicas.Models.Pacientes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nome
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlanoSaude)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pessoas.Nome) @Html.DisplayFor(modelItem => item.Pessoas.Sobrenome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlanoSaude)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PacienteID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PacienteID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PacienteID })
+        </td>
+    </tr>
+}
+
+</table>

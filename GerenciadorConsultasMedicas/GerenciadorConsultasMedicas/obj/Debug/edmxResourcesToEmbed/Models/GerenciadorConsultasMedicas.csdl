@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GerenciadorConsultasMedicasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ConsultaMedica">
+    <Key>
+      <PropertyRef Name="ConsultaMedicaID" />
+    </Key>
+    <Property Name="ConsultaMedicaID" Type="Int32" Nullable="false" />
+    <Property Name="Paciente" Type="Int32" Nullable="false" />
+    <Property Name="Medico" Type="Int32" Nullable="false" />
+    <Property Name="Queixa" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Diagnostico" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Data" Type="DateTime" Precision="0" />
+    <Property Name="Horario" Type="Time" Precision="7" />
+    <NavigationProperty Name="Medicos" Relationship="Self.fk_consulta_medico_pid" FromRole="ConsultaMedica" ToRole="Medicos" />
+    <NavigationProperty Name="Pacientes" Relationship="Self.fk_consulta_paciente_pid" FromRole="ConsultaMedica" ToRole="Pacientes" />
+  </EntityType>
+  <EntityType Name="Especialidades">
+    <Key>
+      <PropertyRef Name="EspecialidadeID" />
+    </Key>
+    <Property Name="EspecialidadeID" Type="Int32" Nullable="false" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Medicos" Relationship="Self.fk_medico_especialidade_pid" FromRole="Especialidades" ToRole="Medicos" />
+  </EntityType>
+  <EntityType Name="Medicos">
+    <Key>
+      <PropertyRef Name="MedicoID" />
+    </Key>
+    <Property Name="MedicoID" Type="Int32" Nullable="false" />
+    <Property Name="CRM" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Pessoa" Type="Int32" Nullable="false" />
+    <Property Name="Especialidade" Type="Int32" Nullable="false" />
+    <Property Name="Titularidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ConsultaMedica" Relationship="Self.fk_consulta_medico_pid" FromRole="Medicos" ToRole="ConsultaMedica" />
+    <NavigationProperty Name="Especialidades" Relationship="Self.fk_medico_especialidade_pid" FromRole="Medicos" ToRole="Especialidades" />
+    <NavigationProperty Name="Pessoas" Relationship="Self.fk_medico_pessoa_pid" FromRole="Medicos" ToRole="Pessoas" />
+  </EntityType>
+  <EntityType Name="Pacientes">
+    <Key>
+      <PropertyRef Name="PacienteID" />
+    </Key>
+    <Property Name="PacienteID" Type="Int32" Nullable="false" />
+    <Property Name="Pessoa" Type="Int32" Nullable="false" />
+    <Property Name="PlanoSaude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ConsultaMedica" Relationship="Self.fk_consulta_paciente_pid" FromRole="Pacientes" ToRole="ConsultaMedica" />
+    <NavigationProperty Name="Pessoas" Relationship="Self.fk_paciente_pessoa_pid" FromRole="Pacientes" ToRole="Pessoas" />
+  </EntityType>
+  <EntityType Name="Pessoas">
+    <Key>
+      <PropertyRef Name="PessoaID" />
+    </Key>
+    <Property Name="PessoaID" Type="Int32" Nullable="false" />
+    <Property Name="CPF" Type="String" MaxLength="14" FixedLength="true" Unicode="false" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Sobrenome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="DataNascimento" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Medicos" Relationship="Self.fk_medico_pessoa_pid" FromRole="Pessoas" ToRole="Medicos" />
+    <NavigationProperty Name="Pacientes" Relationship="Self.fk_paciente_pessoa_pid" FromRole="Pessoas" ToRole="Pacientes" />
+  </EntityType>
+  <Association Name="fk_consulta_medico_pid">
+    <End Role="Medicos" Type="Self.Medicos" Multiplicity="1" />
+    <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicos">
+        <PropertyRef Name="MedicoID" />
+      </Principal>
+      <Dependent Role="ConsultaMedica">
+        <PropertyRef Name="Medico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_consulta_paciente_pid">
+    <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
+    <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pacientes">
+        <PropertyRef Name="PacienteID" />
+      </Principal>
+      <Dependent Role="ConsultaMedica">
+        <PropertyRef Name="Paciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_medico_especialidade_pid">
+    <End Role="Especialidades" Type="Self.Especialidades" Multiplicity="1" />
+    <End Role="Medicos" Type="Self.Medicos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Especialidades">
+        <PropertyRef Name="EspecialidadeID" />
+      </Principal>
+      <Dependent Role="Medicos">
+        <PropertyRef Name="Especialidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_medico_pessoa_pid">
+    <End Role="Pessoas" Type="Self.Pessoas" Multiplicity="1" />
+    <End Role="Medicos" Type="Self.Medicos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pessoas">
+        <PropertyRef Name="PessoaID" />
+      </Principal>
+      <Dependent Role="Medicos">
+        <PropertyRef Name="Pessoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_paciente_pessoa_pid">
+    <End Role="Pessoas" Type="Self.Pessoas" Multiplicity="1" />
+    <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pessoas">
+        <PropertyRef Name="PessoaID" />
+      </Principal>
+      <Dependent Role="Pacientes">
+        <PropertyRef Name="Pessoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GerenciadorConsultasMedicasEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ConsultaMedica" EntityType="Self.ConsultaMedica" />
+    <EntitySet Name="Especialidades" EntityType="Self.Especialidades" />
+    <EntitySet Name="Medicos" EntityType="Self.Medicos" />
+    <EntitySet Name="Pacientes" EntityType="Self.Pacientes" />
+    <EntitySet Name="Pessoas" EntityType="Self.Pessoas" />
+    <AssociationSet Name="fk_consulta_medico_pid" Association="Self.fk_consulta_medico_pid">
+      <End Role="Medicos" EntitySet="Medicos" />
+      <End Role="ConsultaMedica" EntitySet="ConsultaMedica" />
+    </AssociationSet>
+    <AssociationSet Name="fk_consulta_paciente_pid" Association="Self.fk_consulta_paciente_pid">
+      <End Role="Pacientes" EntitySet="Pacientes" />
+      <End Role="ConsultaMedica" EntitySet="ConsultaMedica" />
+    </AssociationSet>
+    <AssociationSet Name="fk_medico_especialidade_pid" Association="Self.fk_medico_especialidade_pid">
+      <End Role="Especialidades" EntitySet="Especialidades" />
+      <End Role="Medicos" EntitySet="Medicos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_medico_pessoa_pid" Association="Self.fk_medico_pessoa_pid">
+      <End Role="Pessoas" EntitySet="Pessoas" />
+      <End Role="Medicos" EntitySet="Medicos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_paciente_pessoa_pid" Association="Self.fk_paciente_pessoa_pid">
+      <End Role="Pessoas" EntitySet="Pessoas" />
+      <End Role="Pacientes" EntitySet="Pacientes" />
+    </AssociationSet>
+    <FunctionImport Name="ListarConsultasOrdenadasPorDataEHora" ReturnType="Collection(GerenciadorConsultasMedicasModel.ListarConsultasOrdenadasPorDataEHora_Result)" />
+    <FunctionImport Name="ListarConsultasPorMedico" ReturnType="Collection(GerenciadorConsultasMedicasModel.ListarConsultasPorMedico_Result)">
+      <Parameter Name="NomeMedico" Mode="In" Type="String" />
+      <Parameter Name="SobrenomeMedico" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarConsultasOrdenadasPorDataEHora1" ReturnType="Collection(GerenciadorConsultasMedicasModel.ListarConsultasOrdenadasPorDataEHora1_Result1)" />
+  </EntityContainer>
+  <ComplexType Name="ListarConsultasOrdenadasPorDataEHora_Result">
+    <Property Type="DateTime" Name="Data" Nullable="true" />
+    <Property Type="Time" Name="Horario" Nullable="true" />
+    <Property Type="String" Name="Médico" Nullable="false" MaxLength="101" />
+    <Property Type="String" Name="Paciente" Nullable="false" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="ListarConsultasPorMedico_Result">
+    <Property Type="DateTime" Name="Data" Nullable="true" />
+    <Property Type="Time" Name="Horario" Nullable="true" />
+    <Property Type="String" Name="Paciente" Nullable="false" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="ListarConsultasOrdenadasPorDataEHora1_Result">
+    <Property Type="DateTime" Name="Data" Nullable="true" />
+    <Property Type="Time" Name="Horario" Nullable="true" />
+    <Property Type="String" Name="Medico" Nullable="false" MaxLength="101" />
+    <Property Type="String" Name="Paciente" Nullable="false" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="ListarConsultasOrdenadasPorDataEHora1_Result1">
+    <Property Type="DateTime" Name="Data" Nullable="true" />
+    <Property Type="Time" Name="Horario" Nullable="true" />
+    <Property Type="String" Name="Medico" Nullable="false" MaxLength="101" />
+    <Property Type="String" Name="Paciente" Nullable="false" MaxLength="101" />
+  </ComplexType>
+</Schema>

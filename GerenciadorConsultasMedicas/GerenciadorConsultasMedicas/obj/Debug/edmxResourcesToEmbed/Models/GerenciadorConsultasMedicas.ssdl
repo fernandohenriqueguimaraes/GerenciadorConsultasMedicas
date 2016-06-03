@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GerenciadorConsultasMedicasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ConsultaMedica">
+    <Key>
+      <PropertyRef Name="ConsultaMedicaID" />
+    </Key>
+    <Property Name="ConsultaMedicaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Paciente" Type="int" Nullable="false" />
+    <Property Name="Medico" Type="int" Nullable="false" />
+    <Property Name="Queixa" Type="varchar" MaxLength="1" />
+    <Property Name="Diagnostico" Type="varchar" MaxLength="1" />
+    <Property Name="Data" Type="date" />
+    <Property Name="Horario" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="Especialidades">
+    <Key>
+      <PropertyRef Name="EspecialidadeID" />
+    </Key>
+    <Property Name="EspecialidadeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Medicos">
+    <Key>
+      <PropertyRef Name="MedicoID" />
+    </Key>
+    <Property Name="MedicoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CRM" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="Pessoa" Type="int" Nullable="false" />
+    <Property Name="Especialidade" Type="int" Nullable="false" />
+    <Property Name="Titularidade" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Pacientes">
+    <Key>
+      <PropertyRef Name="PacienteID" />
+    </Key>
+    <Property Name="PacienteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pessoa" Type="int" Nullable="false" />
+    <Property Name="PlanoSaude" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Pessoas">
+    <Key>
+      <PropertyRef Name="PessoaID" />
+    </Key>
+    <Property Name="PessoaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CPF" Type="char" MaxLength="14" />
+    <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Sobrenome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Sexo" Type="char" MaxLength="1" />
+    <Property Name="DataNascimento" Type="date" />
+  </EntityType>
+  <Association Name="fk_consulta_medico_pid">
+    <End Role="Medicos" Type="Self.Medicos" Multiplicity="1" />
+    <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicos">
+        <PropertyRef Name="MedicoID" />
+      </Principal>
+      <Dependent Role="ConsultaMedica">
+        <PropertyRef Name="Medico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_consulta_paciente_pid">
+    <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
+    <End Role="ConsultaMedica" Type="Self.ConsultaMedica" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pacientes">
+        <PropertyRef Name="PacienteID" />
+      </Principal>
+      <Dependent Role="ConsultaMedica">
+        <PropertyRef Name="Paciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_medico_especialidade_pid">
+    <End Role="Especialidades" Type="Self.Especialidades" Multiplicity="1" />
+    <End Role="Medicos" Type="Self.Medicos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Especialidades">
+        <PropertyRef Name="EspecialidadeID" />
+      </Principal>
+      <Dependent Role="Medicos">
+        <PropertyRef Name="Especialidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_medico_pessoa_pid">
+    <End Role="Pessoas" Type="Self.Pessoas" Multiplicity="1" />
+    <End Role="Medicos" Type="Self.Medicos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pessoas">
+        <PropertyRef Name="PessoaID" />
+      </Principal>
+      <Dependent Role="Medicos">
+        <PropertyRef Name="Pessoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_paciente_pessoa_pid">
+    <End Role="Pessoas" Type="Self.Pessoas" Multiplicity="1" />
+    <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pessoas">
+        <PropertyRef Name="PessoaID" />
+      </Principal>
+      <Dependent Role="Pacientes">
+        <PropertyRef Name="Pessoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ListarConsultasOrdenadasPorDataEHora" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListarConsultasPorMedico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NomeMedico" Type="varchar" Mode="In" />
+    <Parameter Name="SobrenomeMedico" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="GerenciadorConsultasMedicasModelStoreContainer">
+    <EntitySet Name="ConsultaMedica" EntityType="Self.ConsultaMedica" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Especialidades" EntityType="Self.Especialidades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Medicos" EntityType="Self.Medicos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pacientes" EntityType="Self.Pacientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pessoas" EntityType="Self.Pessoas" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_consulta_medico_pid" Association="Self.fk_consulta_medico_pid">
+      <End Role="Medicos" EntitySet="Medicos" />
+      <End Role="ConsultaMedica" EntitySet="ConsultaMedica" />
+    </AssociationSet>
+    <AssociationSet Name="fk_consulta_paciente_pid" Association="Self.fk_consulta_paciente_pid">
+      <End Role="Pacientes" EntitySet="Pacientes" />
+      <End Role="ConsultaMedica" EntitySet="ConsultaMedica" />
+    </AssociationSet>
+    <AssociationSet Name="fk_medico_especialidade_pid" Association="Self.fk_medico_especialidade_pid">
+      <End Role="Especialidades" EntitySet="Especialidades" />
+      <End Role="Medicos" EntitySet="Medicos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_medico_pessoa_pid" Association="Self.fk_medico_pessoa_pid">
+      <End Role="Pessoas" EntitySet="Pessoas" />
+      <End Role="Medicos" EntitySet="Medicos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_paciente_pessoa_pid" Association="Self.fk_paciente_pessoa_pid">
+      <End Role="Pessoas" EntitySet="Pessoas" />
+      <End Role="Pacientes" EntitySet="Pacientes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
