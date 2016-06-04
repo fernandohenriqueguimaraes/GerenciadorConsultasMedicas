@@ -33,6 +33,9 @@ namespace GerenciadorConsultasMedicas.Controllers
             {
                 return HttpNotFound();
             }
+
+            var consultasMedicas = db.ListarConsultasPorIdMedico(id);
+
             return View(medicos);
         }
 

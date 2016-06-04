@@ -1,0 +1,60 @@
+﻿@model IEnumerable<GerenciadorConsultasMedicas.Models.ListarHistoricoPaciente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Histórico do Paciente Selecionado</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Data/Hora da Consulta
+        </th>
+        <th>
+            Médico
+        </th>
+        <th>
+            Especialidade
+        </th>
+        <th>
+            Queixa
+        </th>
+        <th>
+            Diagnóstico
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @String.Format("{0:dd/MM/yyyy}", item.Data) - @Html.DisplayFor(modelItem => item.Horario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Medico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Especialidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Queixa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diagnostico)
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.ActionLink("Back", "Index", "Pacientes")
+
+
+
+
+
+
+
+

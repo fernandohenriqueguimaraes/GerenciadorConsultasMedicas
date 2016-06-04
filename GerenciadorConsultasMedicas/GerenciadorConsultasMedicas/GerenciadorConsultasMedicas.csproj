@@ -241,6 +241,9 @@
     <Compile Include="Models\ListarConsultasOrdenadasPorDataEHora_Result.cs">
       <DependentUpon>GerenciadorConsultasMedicas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ListarConsultasPorIdMedico_Result.cs">
+      <DependentUpon>GerenciadorConsultasMedicas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ListarConsultasPorMedico_Result.cs">
       <DependentUpon>GerenciadorConsultasMedicas.tt</DependentUpon>
     </Compile>
@@ -252,6 +255,12 @@
       <DependentUpon>GerenciadorConsultasMedicas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pessoas.cs">
+      <DependentUpon>GerenciadorConsultasMedicas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>GerenciadorConsultasMedicas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>GerenciadorConsultasMedicas.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

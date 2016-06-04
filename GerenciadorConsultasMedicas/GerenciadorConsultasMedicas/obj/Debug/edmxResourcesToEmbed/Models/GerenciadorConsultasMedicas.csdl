@@ -150,6 +150,39 @@
       <Parameter Name="SobrenomeMedico" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="ListarConsultasOrdenadasPorDataEHora1" ReturnType="Collection(GerenciadorConsultasMedicasModel.ListarConsultasOrdenadasPorDataEHora1_Result1)" />
+    <FunctionImport Name="ListarConsultasPorIdMedico" ReturnType="Collection(GerenciadorConsultasMedicasModel.ListarConsultasPorIdMedico_Result)">
+      <Parameter Name="IdMedico" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(GerenciadorConsultasMedicasModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(GerenciadorConsultasMedicasModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
   <ComplexType Name="ListarConsultasOrdenadasPorDataEHora_Result">
     <Property Type="DateTime" Name="Data" Nullable="true" />
@@ -173,5 +206,21 @@
     <Property Type="Time" Name="Horario" Nullable="true" />
     <Property Type="String" Name="Medico" Nullable="false" MaxLength="101" />
     <Property Type="String" Name="Paciente" Nullable="false" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="ListarConsultasPorIdMedico_Result">
+    <Property Type="DateTime" Name="Data" Nullable="true" />
+    <Property Type="Time" Name="Horario" Nullable="true" />
+    <Property Type="String" Name="Paciente" Nullable="false" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
 </Schema>
